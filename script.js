@@ -1,48 +1,71 @@
-function game() {
-    let winCounter = 0;
-    for (let i = 0; i < 5; i++) {
-        let roundWon = playRound();
-        if (roundWon) {
-            winCounter++;
-        }
-    }
-    console.log(`You won ${winCounter} out of 5 rounds.`)
+setUpRound();
+
+function setUpRound() {
+    resetField();
 }
 
-function playRound() {
-    let playersChoice = getPlayersChoice();
-    let computerChoise = getComputerChoice();
-    return compareChoises(playersChoice, computerChoise);
+function registerPlayersChoice(playersChoiceEvent) {
+
+    let playersSign = document.querySelector(`#${playersChoiceEvent.currentTarget.id}`);
+    playersSign.classList.add("selected-sign");
+    let computerChoice = getComputerChoice();
+    let opponentSing = document.querySelector(`#opponents-${computerChoice.toLowerCase()}`);
+    opponentSing.classList.add("selected-sign");
+    let notSelectedSigns = document.querySelectorAll(`.sign:not(.selected-sign)`);
+    notSelectedSigns.forEach(sign => sign.classList.add("non-selected-sign"))
+    let playersChoice = capitalize(playersSign.id);
+    let roundResult = compareChoises(playersChoice, computerChoice);
+    showRoundResult(roundResult, playersChoice, computerChoice);
+    addNewRoundBurron();
 }
 
-function compareChoises(playersChoise, computerChoise) {
-    let capitalizedPlayerChoise = capitalize(playersChoise);
-    if (capitalizedPlayerChoise == computerChoise) {
-        console.log(`It's a draw. You both picked ${capitalizedPlayerChoise}.`)
-        return playRound()
+function addNewRoundBurron() {
+    const newRoundButton = document.createElement("button");
+    newRoundButton.textContent = "New round";
+    newRoundButton.addEventListener("click", resetField);
+    let resultElement = document.querySelector(`#round-result`);
+    resultElement.appendChild(newRoundButton);
+}
+
+function resetField() {
+    let resultElement = document.querySelector(`#round-result`);
+    let newRoundButton = document.querySelector(`#round-result button`);
+    if (newRoundButton != null) {
+        resultElement.removeChild(newRoundButton);
     }
-    let didYouWin = false;
-    switch (capitalizedPlayerChoise) {
+    let resultParagraph = document.querySelector(`#round-result p`);
+    resultParagraph.textContent = "";
+    const playersSigns = document.querySelectorAll("#players-choice > .sign");
+    playersSigns.forEach(sign =>
+        sign.addEventListener("click", registerPlayersChoice, { once: true }));
+    const signs = document.querySelectorAll(".sign");
+    signs.forEach(sign =>
+        sign.classList.remove("selected-sign", "non-selected-sign"));
+}
+
+function removeSignListeners() {
+    const playersSigns = document.querySelectorAll("#players-choice > .sign");
+    playersSigns.forEach(sign =>
+        sign.removeEventListener("click", registerPlayersChoice));
+}
+
+function compareChoises(playersChoice, computerChoice) {
+    if (playersChoice == computerChoice) {
+        return "Draw"
+    }
+    let youWon = false;
+    switch (playersChoice) {
         case ("Rock"):
-            didYouWin = computerChoise == "Scissors";
+            youWon = computerChoice == "Scissors";
             break;
         case ("Paper"):
-            didYouWin = computerChoise == "Rock";
+            youWon = computerChoice == "Rock";
             break;
         case ("Scissors"):
-            didYouWin = computerChoise == "Paper";
+            youWon = computerChoice == "Paper";
             break;
     }
-    if (didYouWin) {
-        console.log(`You Win! ${capitalizedPlayerChoise} beats ${computerChoise}.`);
-    } else {
-        console.log(`You Lose! ${computerChoise} beats ${capitalizedPlayerChoise}.`);
-    }
-    return didYouWin;
-}
-
-function getPlayersChoice() {
-    return prompt("Write your option from Rock, Paper, Scissors", "Rock");
+    return youWon ? "Win" : "Lose";
 }
 
 function getComputerChoice() {
@@ -54,6 +77,21 @@ function getComputerChoice() {
             return "Paper";
         case 2:
             return "Scissors";
+    }
+}
+
+function showRoundResult(roundResult, playersChoice, computerChoice) {
+    let resultElement = document.querySelector(`#round-result p`);
+    switch (roundResult) {
+        case "Draw":
+            resultElement.textContent = `It's a Draw!\r\nYou both picked ${playersChoice}.`;
+            break;
+        case "Win":
+            resultElement.textContent = `You Win!\r\n${playersChoice} beats ${computerChoice}.`;
+            break;
+        case "Lose":
+            resultElement.textContent = `You Lose!\r\n${computerChoice} beats ${playersChoice}.`;
+            break
     }
 }
 
