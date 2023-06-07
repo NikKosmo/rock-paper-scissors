@@ -1,0 +1,78 @@
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    flex: 1;
+}
+
+body>div {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+}
+
+#header,
+#footer {
+    background-color: #1f2937;
+    color: #f9faf8;
+    flex: none;
+    height: 48px;
+    align-items: center;
+}
+
+#header {
+    font-size: 32px;
+}
+
+#footer {
+    flex-direction: column;
+}
+
+#footer a {
+    text-decoration: none;
+    color: #f9faf8;
+}
+
+#rules {
+    background-color: bisque;
+    flex-direction: column;
+    align-items: center;
+}
+
+#field {
+    width: 800px;
+    max-height: 100vh;
+    min-height: 0px;
+    justify-content: space-between;
+    align-self: center;
+}
+
+#field>div {
+    display: flex;
+}
+
+#players-choice,
+#opponents-choice {
+    flex-direction: column;
+}
+
+.selected-sign {
+    background-color: #3882f6;
+    border-radius: 25px;
+}
+
+.non-selected-sign {
+    opacity: 0.5;
+}
+
+#round-result{
+flex-direction: column;
+justify-content: center;
+}
+
+#round-result p{
+    align-self: center;
+    font-size: 24px;
+}
