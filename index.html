@@ -12,11 +12,12 @@
 <body>
     <div id="header">Rock Paper Scissors</div>
     <div id="rules">
-        <img src="images/rules.svg" alt="Rock Paper Scissor rules">
-        <a href="https://commons.wikimedia.org/w/index.php?curid=27958688">By Enzoklop - Own work, CC BY-SA 3.0</a>
+        <img class="collapsed" src="images/rules.svg" alt="Rock Paper Scissor rules">
+        <button id="show-rules">Show rules</button>
     </div>
     <div id="field">
         <div id="players-choice">
+            <div>Your choise</div>
             <div class="sign" id="rock"><img src="images/rock.svg" alt="Rock"></div>
             <div class="sign" id="paper"><img src="images/paper.svg" alt="Paper"></div>
             <div class="sign" id="scissors"><img src="images/scissors.svg" alt="Scissors"></div>
@@ -24,19 +25,19 @@
         <div id="round-result">
             <p></p>
         </div>
-        <!-- <p  id="round-result"></p> -->
         <div id="opponents-choice">
+            <div>Opponents choise</div>
             <div class="sign" id="opponents-rock"><img src="images/rock.svg" alt="Rock"></div>
             <div class="sign" id="opponents-paper"><img src="images/paper.svg" alt="Paper"></div>
             <div class="sign" id="opponents-scissors"><img src="images/scissors.svg" alt="Scissors"></div>
         </div>
     </div>
-    <!-- <div id="score">1:0</div> -->
-    <!-- <div id="history">Rock-Paper: Win</div> -->
+    <div id="score"></div>
     <div id="footer">
         <div>Copyright © Nik Kosmo 2023</div>
-        <a href="https://commons.wikimedia.org/w/index.php?curid=27958688">Images by Enzoklop - Own work, CC BY-SA
-            3.0</a>
+        <a href="https://commons.wikimedia.org/w/index.php?curid=27958688">
+            Images by Enzoklop - Own work, CC BY-SA 3.0
+        </a>
     </div>
 </body>
 <script src="script.js"></script>

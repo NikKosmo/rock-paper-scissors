@@ -41,6 +41,10 @@ body>div {
     align-items: center;
 }
 
+.collapsed {
+    height: 0px;
+}
+
 #field {
     width: 800px;
     max-height: 100vh;
@@ -56,6 +60,8 @@ body>div {
 #players-choice,
 #opponents-choice {
     flex-direction: column;
+    align-items: center;
+    color: #1f2937;
 }
 
 .selected-sign {
